@@ -6,6 +6,8 @@ import java8.data.Data;
 import java8.data.Person;
 import org.junit.Test;
 
+import static org.junit.Assert.*;
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -110,8 +112,8 @@ public class Lambda_04_Test {
                 // TODO vérifier que chaque titulaire de compte a un age > 50
                 .forEach(a -> {
                 	
-                	assertTrue("Un compte pas à 1000", a.getBalance() > 1000);
-                	assertTrue("Le titulaire n'as pas 50 ans", a.getOwner().getAge > 50);
+                	assertTrue("Un compte pas à 1000", a.getBalance() == 1000);
+                	assertTrue("Le titulaire n'as pas 50 ans", a.getOwner().getAge() > 50);
                 });
     }
     // end::test_filter_map_forEach[]
@@ -124,25 +126,35 @@ public class Lambda_04_Test {
         FuncCollection<Person> personFuncCollection = new FuncCollection<>();
         personFuncCollection.addAll(personList);
 
-        // TODO créer un variable filterByAge de type GenericPredicate
+        // TODO créer une variable filterByAge de type GenericPredicate
         // TODO filtrer, ne garder uniquement que les personnes ayant un age > 50
-        // ??? filterByAge = ???;
+         GenericPredicate <Person> filterByAge = p -> p.getAge() > 50;
+        
 
         // TODO créer un variable mapToAccount de type GenericMapper
         // TODO transformer la liste de personnes en liste de comptes. Un compte a par défaut un solde à 1000.
-        // ??? mapToAccount = ???;
+        GenericMapper<Person, Account> mapToAccount = p -> { 
+        								Account account = new Account();
+        								account.setOwner(p);
+        								account.setBalance(1000);	
+        								return account; 
+        								};
 
-        // TODO créer un variable verifyAccount de type GenericMapper
+        // TODO créer un variable verifyAccount de type Processor
         // TODO vérifier que chaque compte a un solde à 1000.
         // TODO vérifier que chaque titulaire de compte a un age > 50
-        // ??? verifyAccount = ???;
+         Processor<Account> verifyAccount = a -> {
+        			                	
+        			                	assertTrue("Un compte pas à 1000", a.getBalance() == 1000);
+        			                	assertTrue("Le titulaire n'as pas 50 ans", a.getOwner().getAge() > 50);
+        			                };
 
-        /* TODO Décommenter
+        // TODO Décommenter
         personFuncCollection
                 .filter(filterByAge)
                 .map(mapToAccount)
                 .forEach(verifyAccount);
-        */
+        
     }
     // end::test_filter_map_forEach_with_vars[]
 
