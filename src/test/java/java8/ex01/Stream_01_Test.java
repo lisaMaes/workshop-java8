@@ -24,7 +24,9 @@ public class Stream_01_Test {
 
         // TODO récupérer la liste des pizzas dont le prix est >= 1300
         // TODO utiliser l'API Stream
-        List<Pizza> result = null;
+        List<Pizza> result = pizzas.stream()
+        							.filter(p->p.getPrice() >= 1300)
+        							.collect(Collectors.toList());
 
         assertThat(result, hasSize(3));
         assertThat(result, everyItem(hasProperty("price", anyOf(equalTo(1300), greaterThan(1300)))));
