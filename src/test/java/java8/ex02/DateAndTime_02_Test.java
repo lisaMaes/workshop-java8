@@ -61,11 +61,10 @@ public class DateAndTime_02_Test {
 
         // TODO créer un objet LocalDate à la date 11/03/2015
         // TODO utiliser la méthode of
-        LocalDate localDate = LocalDate.of(2015, 3, 11);
-
+        LocalDateTime localDate = LocalDateTime.of(2015, 03, 11, 0,0,0);
         // TODO Formatter la date pour que le test soit passant
-        String result = result.format(DateTimeFormatter.ofPattern("dd - mm - yyyy"));
-
+        String result = localDate.format(DateTimeFormatter.ofPattern("dd - MM - yyyy"));
+      
         assertThat(result, is("11 - 03 - 2015"));
     }
 
@@ -74,7 +73,7 @@ public class DateAndTime_02_Test {
 
         // TODO créer un objet LocalDate à la date 11/03/2015
         // TODO utiliser la méthode of
-        LocalDate localDate = null;
+        LocalDate localDate = LocalDate.of(2015, 03, 11);
 
         // TODO Formatter la date pour avoir l'affichage suivant : "11/03/2015 00:00:00"
         localDate.format(null);
