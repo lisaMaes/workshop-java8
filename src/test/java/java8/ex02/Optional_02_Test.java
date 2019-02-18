@@ -70,7 +70,9 @@ public class Optional_02_Test {
         // TODO utiliser la méthode isPresent pour vérifier que l'age est bien 30, déclencher l'exception GoodException pour valider que la fonction en paramètre de ifPresent a bien été exécutée.
         // julesOpt.filter...;
         julesOpt.filter(adult)
-        		.map(p->(p.getAge() == 30));
-        		julesOpt.ifPresent(p->new GoodException());
+        .map(p->(p.getAge()))
+        .ifPresent(p->{            
+            if(p == 30) throw new GoodException();
+        });
     }
 }
